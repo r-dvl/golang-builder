@@ -23,14 +23,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Linux image
-        uses: docker/build-push-action@v4
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          context: ./linux
-          platforms: linux/amd64
-          push: true
-          tags: linux
-          labels: Linux Golang Builder
+          images: |
+            ghcr.io/${{ github.repository }}
 
       - name: Build and push Windows image
         uses: docker/build-push-action@v4
@@ -38,5 +36,5 @@ jobs:
           context: ./windows
           platforms: windows/amd64
           push: true
-          tags: windows
-          labels: Windows Golang Builder
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
