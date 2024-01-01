@@ -48,8 +48,8 @@ jobs:
       - name: Build and push Windows image
         uses: docker/build-push-action@v4
         with:
-          context: ./linux
-          platforms: linux/amd64
+          context: ./windows
+          platforms: windows/amd64
           push: true
           tags: windows
           labels: ${{ steps.meta.outputs.labels }}
