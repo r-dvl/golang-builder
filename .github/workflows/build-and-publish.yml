@@ -13,6 +13,9 @@ jobs:
       contents: read
 
     steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
@@ -26,14 +29,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check out the repo
-        uses: actions/checkout@v3
-
       - name: Build and push Windows image
         uses: docker/build-push-action@v5
         with:
           context: ./windows
           platforms: linux/amd64
           push: true
-          tags: r-dvl/golang-builder:windows
+          tags: ghcr.io/r-dvl/golang-builder:windows
           labels: Windows Golang builder
