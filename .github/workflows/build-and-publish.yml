@@ -1,4 +1,4 @@
-name: Publish Docker image
+name: Build and publish
 
 on:
     push:
@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       packages: write
-      contents: read
+      contents: write
+
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -29,13 +30,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-        with:
-          images: |
-            ghcr.io/${{ github.repository }}
-
       - name: Build and push Linux image
         uses: docker/build-push-action@v4
         with:
@@ -43,7 +37,7 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: linux
-          labels: ${{ steps.meta.outputs.labels }}
+          labels: Linux Golang Builder
 
       - name: Build and push Windows image
         uses: docker/build-push-action@v4
@@ -52,4 +46,4 @@ jobs:
           platforms: windows/amd64
           push: true
           tags: windows
-          labels: ${{ steps.meta.outputs.labels }}
+          labels: Windows Golang Builder
