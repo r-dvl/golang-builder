@@ -29,5 +29,5 @@ jobs:
           context: ./windows
           platforms: windows/amd64
           push: true
-          tags: windows
+          tags: r-dvl/golang-builder:windows
           labels: Windows Golang builder
