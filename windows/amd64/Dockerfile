@@ -9,4 +9,4 @@ ENV GOOS=windows
 ENV GOARCH=amd64
 ENV CGO_ENABLED=1
 ENV CC=x86_64-w64-mingw32-gcc
-ENV EXT=exe
+ENV EXT=.exe

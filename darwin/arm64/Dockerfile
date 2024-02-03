@@ -35,7 +35,7 @@ ENV PATH="/osxcross/target/bin:${PATH}"
 
 # Go build params
 ENV GOOS=darwin
-ENV GOARCH=amd64
+ENV GOARCH=arm64
 ENV CGO_ENABLED=1
 ENV CC=o64-clang
-ENV EXT=app
+ENV EXT=
